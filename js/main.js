@@ -47,10 +47,10 @@ const addCategory = () =>{
    return{
       id:id(),
       category : $('#nameCategory').value
-   }
+}
 }
 
-const pushCategory = () =>{
+const pushCategory = (value) =>{
    const newArray = get('categories')
    const addNewCategory = addCategory()
    newArray.push(addNewCategory)
@@ -78,9 +78,27 @@ const deleteCategory = (id) =>{
 }
 
 const editForm = (id) =>{
-   const editSelectedCategory = get('categories').find(category => category.id === id)
+   const categoryId = $('#editCategory').setAttribute('category-id', id)
+   const editSelectedCategory = get('categories').find(category => category.id ===  id)
    $('#nameCategoryEdit').value = editSelectedCategory.category
 }
+
+const editCategory = () => {
+   const categoryId = $('#editCategory').getAttribute('category-id');
+   const categoryIdParse = parseInt(categoryId)
+   const updatedCategories = get('categories').map(category => {
+      if (category.id === categoryIdParse) {
+         return { 
+                  id: category.id, 
+                  category: $('#nameCategoryEdit').value 
+               }
+      }
+      return category
+   })
+   set('categories', updatedCategories)
+   showCategory(get('categories'))
+}
+
 
 const initializer = () =>{
    get('categories')
@@ -89,6 +107,10 @@ const initializer = () =>{
       e.preventDefault()
       pushCategory()
       showCategory(get('categories'))
+   })
+   $('#editCategory').addEventListener('click', (e) =>{
+      e.preventDefault()
+      editCategory()
    })
 }
 
