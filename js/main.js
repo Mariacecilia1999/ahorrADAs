@@ -1,6 +1,9 @@
 const $ = selector => document.querySelector(selector)
 const $$ = selector => document.querySelectorAll(selector)
 
+const get = (key) => JSON.parse(localStorage.getItem(key))
+const set = (key, array) => localStorage.setItem(key, JSON.stringify(array))
+const storedCategories = !get('categories') ? set('categories', categories) : null
 const id = (() => {
    let id = 1
    return () => {
@@ -45,11 +48,13 @@ const addCategory = () =>{
 }
 
 const pushCategory = () =>{
-   categories.push(addCategory())
-   showCategory()
+   const newArray = get('categories')
+   const addNewCategory = addCategory()
+   newArray.push(addNewCategory)
+   set('categories', newArray)
 }
 
-const showCategory = () =>{
+const showCategory = (categories) =>{
    $('#showCategory').innerHTML = ''
    for(const {id, category} of categories){
    $('#showCategory').innerHTML += `<div class= "flex justify-between py-3">
@@ -64,10 +69,12 @@ const showCategory = () =>{
                               }
 
 const initializer = () =>{
+   get('categories')
+   showCategory(get('categories'))
    $('#addCategory').addEventListener('click', (e) =>{
       e.preventDefault()
       pushCategory()
-      showCategory()
+      showCategory(get('categories'))
    })
 }
 
