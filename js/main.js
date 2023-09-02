@@ -132,8 +132,13 @@ const pushOperation = () =>{
 
 
 
+/*Show all categories on filters*/ 
 
-
+const showCategoriesFilters = (categories) =>{
+   for(const {category} of categories){
+      $('#filterCategory').innerHTML += `<option value="${category}">${category}</option>`
+   }
+}
 
 
 
@@ -152,6 +157,7 @@ const initializer = () =>{
       editCategory()
    })
    showCategoriesFormOperations(get('categories'))
+   showCategoriesFilters(get('categories'))
    $('#addOperation').addEventListener('click', (e) =>{
       e.preventDefault()
       pushOperation()
