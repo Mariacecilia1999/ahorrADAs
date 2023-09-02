@@ -107,9 +107,40 @@ const showCategoriesFormOperations = (categories) =>{
    }
 }
 
+const operations = () => {
+  return {
+      id:id(),
+      description: $('#description').value,
+      cost: $('#cost').value,
+      typeOperation: $('#typeOperation').value,
+      categoryOperation: $('#newOperationsCategories').value,
+      date: $('#date')
+   }
+}
+
+
+/*LocalStorage for operations*/
+const storedOperations = !get('operations') ? set('operations', operations) : null
+
+const pushOperation = () =>{
+   const operationsArr = get('operations')
+   const newOperation = operations()
+   operationsArr.push(newOperation)
+   set('operations', operationsArr)
+   console.log(get('operations'))
+}
+
+
+
+
+
+
+
 
 const initializer = () =>{
    get('categories')
+   get('operations')
+   console.log(get('operations'))
    showCategory(get('categories'))
    $('#addCategory').addEventListener('click', (e) =>{
       e.preventDefault()
@@ -121,6 +152,10 @@ const initializer = () =>{
       editCategory()
    })
    showCategoriesFormOperations(get('categories'))
+   $('#addOperation').addEventListener('click', (e) =>{
+      e.preventDefault()
+      pushOperation()
+   })
 }
 
 window.addEventListener('load', initializer)
