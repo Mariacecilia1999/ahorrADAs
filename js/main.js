@@ -99,6 +99,14 @@ const editCategory = () => {
    showCategory(get('categories'))
 }
 
+//NEW OPERATION FORM CATEGORIES
+
+const showCategoriesFormOperations = (categories) =>{
+   for(const {category} of categories){
+      $('#newOperationsCategories').innerHTML += `<option value="${category}">${category}</option>`
+   }
+}
+
 
 const initializer = () =>{
    get('categories')
@@ -112,6 +120,7 @@ const initializer = () =>{
       e.preventDefault()
       editCategory()
    })
+   showCategoriesFormOperations(get('categories'))
 }
 
 window.addEventListener('load', initializer)
