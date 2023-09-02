@@ -11,8 +11,8 @@
  />
    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-   <header class="bg-teal-400 flex justify-between px-7 py-8">
+<body class="bg-gray-100">
+   <!-- <header class="bg-teal-400 flex justify-between px-7 py-8">
       <h1 class="text-white text-4xl font-semibold"><i class="fas fa-wallet mr-2" aria-hidden="true"></i>AhorrADAs</h1>
       <nav class="w-3/12">
          <ul class="flex justify-between">
@@ -35,7 +35,78 @@
             </li>
          </ul>
       </nav>
-   </header>
+   </header> -->
+   <!--Section balance-->
+   <section class="mt-10 sm:flex-col lg:flex">
+    <div class="sm:flex-col lg:flex lg:flex-row justify-center lg:w-12/12">
+        <div class="flex-col">
+            <div class="sm:w-full bg-white rounded mx-5 my-5 py-6 px-7 lg:w-10/12">
+                <h3 class="text-3xl font-bold pt-5">Balance</h3>
+                <div class="flex justify-between pt-9 py-2">
+                    <p>Ganancias</p>
+                    <span class="text-green-300">+$0</span>
+                </div>
+                <div class="flex justify-between py-2">
+                    <p>Gastos</p>
+                    <span class="text-red-300">-$0</span>
+                </div>
+                <div class="flex justify-between py-2">
+                    <p>Total</p>
+                    <span class="text-gray-500">$0</span>
+                </div>
+            </div>
+            <div class="sm:w-full bg-white rounded mx-5 my-5 py-8 px-7 lg:w-10/12">
+                <div class="flex justify-between items-center pt-1 pb-5">
+                    <h3 class="font-bold text-2xl text-gray-800">Filtros</h3>
+                    <a href="#" class="text-sky-500">Ocultar filtros</a>
+                </div>
+                <div class="flex flex-col">
+                    <label for="" class="py-2 font-semibold">Tipo</label>
+                    <select name="" id="filterType" class="border rounded py-2">
+                        <option value="todos">Todos</option>
+                        <option value="gasto">Gasto</option>
+                        <option value="ganancia">Ganancia</option>
+                    </select>
+                </div>
+                <div class="flex flex-col">
+                    <label for="" class="py-2 font-semibold">Categoría</label>
+                    <!--Dynamic categories with js arr-->
+                    <select name="" id="filterCategory" class="border rounded py-2">
+                        <option value="todas">Todas</option>
+                    </select>
+                </div>
+                <div class="flex flex-col">
+                    <label for="" class="py-2 font-semibold">Desde</label>
+                    <input type="date" class="border rounded py-2">
+                </div>
+
+                <div class="py-2">
+                    <label for="" class="font-semibold">Ordenar por</label>
+                    <select name="" id="filterBy" class="border w-full rounded py-2">
+                        <option value="masReciente">Más reciente</option>
+                        <option value="menosReciente">Menos reciente</option>
+                        <option value="mayorMonto">Mayor monto</option>
+                        <option value="menorMonto">Menor monto</option>
+                        <option value="az">A/Z</option>
+                        <option value="za">Z/A</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!--Operations without results-->
+        <div class="bg-white rounded sm:full lg:w-6/12 px-3 py-5 px-5 mx-5 my-5 lg:h-5/6">
+            <div class="flex justify-between">
+                <h3 class="text-3xl font-bold">Operaciones</h3>
+                <button class="font-bold text-white bg-green-500 rounded py-2 px-4">+ Nueva operación</button>
+            </div>
+            <div class="flex flex-col items-center mb-4">
+                <img src="./img/wallet.svg" alt="" class="w-5/12 py-9 my-7">
+                <h4 class="text-2xl text-gray-800 font-semibold pt-5">Sin resultados</h4>
+                <p class="pt-5 py-3" >Cambia los filtros o agrega operaciones</p>
+            </div>
+        </div>
+    </div>
+   </section>
    <script src="./js/main.js"></script>
 </body>
 </html>
