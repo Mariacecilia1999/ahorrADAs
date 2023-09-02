@@ -78,6 +78,8 @@ const deleteCategory = (id) =>{
 }
 
 const editForm = (id) =>{
+   $('#sectionCategories').classList.add('hidden', 'lg:hidden')
+   $('#sectionEditCategory').classList.remove('hidden', 'lg:hidden')
    const categoryId = $('#editCategory').setAttribute('category-id', id)
    const editSelectedCategory = get('categories').find(category => category.id ===  id)
    $('#nameCategoryEdit').value = editSelectedCategory.category
@@ -114,13 +116,13 @@ const operations = () => {
       cost: $('#cost').value,
       typeOperation: $('#typeOperation').value,
       categoryOperation: $('#newOperationsCategories').value,
-      date: $('#date')
+      date: $('#date').value
    }
 }
 
 
 /*LocalStorage for operations*/
-const storedOperations = !get('operations') ? set('operations', operations) : null
+const storedOperations = get('operations') || []
 
 const pushOperation = () =>{
    const operationsArr = get('operations')
@@ -140,24 +142,49 @@ const showCategoriesFilters = (categories) =>{
    }
 }
 
+const showOperations = (operations) =>{
+   if(operations.length > 0){
+      $('#operationWithoutResults').classList.add('hidden', 'lg:hidden')
+      $('#operationWithResults').classList.remove('hidden', 'lg:hidden')
+      $('.showingOperations').innerHTML = ''
+      for(const {id, description, cost, typeOperation, categoryOperation, date} of operations){
+         $('.showingOperations').innerHTML += ` <tr>
+                                                   <td>${description}</td>
+                                                   <td>${categoryOperation}</td>
+                                                   <td>${date}</td>
+                                                   <td>${cost}</td>
+                                                   <td>
+                                                      <a>Editar</a>
+                                                      <a>Eliminar</a>
+                                                   </td>
+                                                </tr>
+                                                `
+      }
+   }else{
+      $('#operationWithoutResults').classList.remove('hidden', 'lg:hidden')
+      $('#operationWithResults').classList.add('hidden', 'lg:hidden')
+   }
+}
+
+
 const showHiddeNavBar = () =>{
    $('.navBarCategories').addEventListener('click', () =>{
       $('#sectionBalance').classList.add('hidden', 'lg:hidden')
       $('#sectionReports').classList.add('hidden', 'lg:hidden')
       $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
       $('#addCategory').addEventListener('click', () =>{
-         $('#sectionCategories').classList.add('hidden', 'lg:hidden')
-         $('#sectionEditCategory').classList.remove('hidden', 'lg:hidden')
-         $('#editCategory').addEventListener('click', () =>{
-            $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
-            $('#sectionEditCategory').classList.add('hidden', 'lg:hidden')
-         })
-         $('#cancelEditCategory').addEventListener('click', () =>{
-            $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
-            $('#sectionEditCategory').classList.add('hidden', 'lg:hidden')
-         })
-      })
+         $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+         //$('#sectionEditCategory').classList.remove('hidden', 'lg:hidden')
    })
+   $('#editCategory').addEventListener('click', () =>{
+      $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+      $('#sectionEditCategory').classList.add('hidden', 'lg:hidden')
+   })
+   $('#cancelEditCategory').addEventListener('click', () =>{
+      $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+      $('#sectionEditCategory').classList.add('hidden', 'lg:hidden')
+   })
+})
    $('.navBarBalance').addEventListener('click', () =>{
       $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
       $('#sectionCategories').classList.add('hidden', 'lg:hidden')
@@ -168,12 +195,30 @@ const showHiddeNavBar = () =>{
       $('#sectionCategories').classList.add('hidden', 'lg:hidden')
       $('#sectionReports').classList.remove('hidden', 'lg:hidden')
    })
+
+   $('#btnAddNewOperation').addEventListener('click', () =>{
+      $('#sectionBalance').classList.add('hidden', 'lg:hidden')
+      $('#sectionNewOperationForm').classList.remove('hidden', 'lg:hidden')
+   })
+
+   $('#btnAddNewOperationNew').addEventListener('click', () =>{
+      $('#sectionBalance').classList.add('hidden', 'lg:hidden')
+      $('#sectionNewOperationForm').classList.remove('hidden', 'lg:hidden')
+   })
+
+   $('#addOperation').addEventListener('click', () =>{
+      $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
+      $('#sectionNewOperationForm').classList.add('hidden', 'lg:hidden')
+      showOperations(get('operations'))
+   })
+   $('#cancelAddOperation').addEventListener('click', () =>{
+      $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
+      $('#sectionNewOperationForm').classList.add('hidden', 'lg:hidden')
+   })
 }
 
 const initializer = () =>{
-   get('categories')
-   get('operations')
-   console.log(get('operations'))
+   set('operations', storedOperations)
    showCategory(get('categories'))
    $('#addCategory').addEventListener('click', (e) =>{
       e.preventDefault()
@@ -191,6 +236,7 @@ const initializer = () =>{
       pushOperation()
    })
    showHiddeNavBar()
+   showOperations(get('operations'))
 }
 
 window.addEventListener('load', initializer)

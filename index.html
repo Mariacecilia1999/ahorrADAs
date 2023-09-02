@@ -94,21 +94,42 @@
             </div>
         </div>
         <!--Operations without results-->
-        <div class="bg-white rounded sm:full lg:w-6/12 px-3 py-5 px-5 mx-5 my-5 lg:h-5/6">
-            <div class="flex justify-between">
-                <h3 class="text-3xl font-bold">Operaciones</h3>
-                <button class="font-bold text-white bg-green-500 rounded py-2 px-4">+ Nueva operación</button>
+            <div class="bg-white rounded sm:full lg:w-6/12 px-3 py-5 px-5 mx-5 my-5 lg:h-5/6" id="operationWithoutResults">
+                <div class="flex justify-between">
+                    <h3 class="text-3xl font-bold">Operaciones</h3>
+                    <button class="font-bold text-white bg-green-500 rounded py-2 px-4" id="btnAddNewOperation">+ Nueva operación</button>
+                </div>
+                <div class="flex flex-col items-center mb-4">
+                    <img src="./img/wallet.svg" alt="" class="w-5/12 py-9 my-7">
+                    <h4 class="text-2xl text-gray-800 font-semibold pt-5">Sin resultados</h4>
+                    <p class="pt-5 py-3" >Cambia los filtros o agrega operaciones</p>
+                </div>
             </div>
-            <div class="flex flex-col items-center mb-4">
-                <img src="./img/wallet.svg" alt="" class="w-5/12 py-9 my-7">
-                <h4 class="text-2xl text-gray-800 font-semibold pt-5">Sin resultados</h4>
-                <p class="pt-5 py-3" >Cambia los filtros o agrega operaciones</p>
+
+            <!--Operations with results-->
+            <div class="bg-white rounded sm:full lg:w-6/12 px-3 py-5 px-5 mx-5 my-5 lg:h-5/6" id="operationWithResults">
+                <div class="flex justify-between">
+                    <h3 class="text-3xl font-bold">Operaciones</h3>
+                    <button class="font-bold text-white bg-green-500 rounded py-2 px-4" id="btnAddNewOperationNew">+ Nueva operación</button>
+                </div>
+                <div class="mb-4 mt-7">
+                    <table class="w-full">
+                        <tr>
+                           <th>Descripción</th>
+                           <th>Categoría</th>
+                           <th>Fecha</th>
+                           <th>Monto</th>
+                           <th>Acciones</th>
+                        </tr>
+                        <tbody class="showingOperations text-center">
+                        </tbody>
+                        
+                    </table>
             </div>
         </div>
-    </div>
    </section>
    <!--Section new operation-->
-   <section class="my-5 flex justify-center hidden">
+   <section class="my-5 flex justify-center hidden" id="sectionNewOperationForm">
     <div class="mx-5 w-full sm:w-full sm:mx-5 bg-white rounded py-5 lg:w-7/12">
         <div class="sm:w-full w-12/12 px-5">
             <h2 class="text-4xl font-bold py-2">Nueva operación</h2>
@@ -142,7 +163,7 @@
                     <input type="date" id="date" class="border rounded border-black border-slate-200 w-12/12 py-2">
                   </div>
                     <div class="mt-9 flex justify-end">
-                        <button class="bg-gray-200 rounded  px-5 py-2 ml-4">Cancelar</button>
+                        <button class="bg-gray-200 rounded  px-5 py-2 ml-4" id="cancelAddOperation">Cancelar</button>
                         <button class="bg-green-500 rounded text-white px-5 py-2 ml-4" id="addOperation">Agregar</button>
                     </div>
                 </form>
