@@ -16,18 +16,18 @@
       <h1 class="text-white text-4xl font-semibold"><i class="fas fa-wallet mr-2" aria-hidden="true"></i>AhorrADAs</h1>
       <nav class="w-3/12">
          <ul class="flex justify-between">
-            <li>
+            <li class="navBarBalance">
                <a href="#" class="text-white">
                   <i class="fas fa-chart-line mr-2" aria-hidden="true"></i
                      >Balance
                </a>
             </li>
-            <li>
+            <li class="navBarCategories">
                <a href="#" class="text-white">
                   <i class="fas fa-tag mr-2" aria-hidden="true"></i>Categorías
                </a>
             </li>
-            <li>
+            <li class="navBarReports">
                <a href="#" class="text-white">
                   <i class="fas fa-chart-pie mr-2" aria-hidden="true"></i
                      >Reportes
@@ -37,7 +37,7 @@
       </nav>
    </header> 
    <!--Section balance-->
-   <section class="mt-10 sm:flex-col lg:flex">
+   <section class="mt-10 sm:flex-col lg:flex" id="sectionBalance">
     <div class="sm:flex-col lg:flex lg:flex-row justify-center lg:w-12/12">
         <div class="flex-col">
             <div class="sm:w-full bg-white rounded mx-5 my-5 py-6 px-7 lg:w-10/12">
@@ -107,8 +107,8 @@
         </div>
     </div>
    </section>
-   <!--Section category-->
-   <section class="my-5 flex justify-center">
+   <!--Section new operation-->
+   <section class="my-5 flex justify-center hidden">
     <div class="mx-5 w-full sm:w-full sm:mx-5 bg-white rounded py-5 lg:w-7/12">
         <div class="sm:w-full w-12/12 px-5">
             <h2 class="text-4xl font-bold py-2">Nueva operación</h2>
@@ -151,7 +151,7 @@
     </div>
    </section>
    <!--Section category-->
-   <section class="my-5 flex justify-center">
+   <section class="my-5 flex justify-center hidden" id="sectionCategories">
       <div class="mx-5 w-full sm:w-full sm:mx-5 bg-white rounded py-5 lg:w-7/12">
           <div class="sm:w-full w-12/12 px-4">
               <h2 class="text-4xl font-bold py-4">Categorías</h2>
@@ -173,7 +173,7 @@
           </div>
       </div>
   </section>
-  <section class="my-5 flex justify-center">
+  <section class="my-5 flex justify-center hidden" id="sectionEditCategory">
     <div class="mx-5 w-full sm:w-full sm:mx-5 bg-white rounded py-5 lg:w-7/12">
         <div class="sm:w-full w-12/12 px-4">
             <h2 class="text-4xl font-bold py-4">Editar categoría</h2>
@@ -184,7 +184,7 @@
                         <input type="text" class="border rounded border-black border-slate-200 w-11/12 py-2" id="nameCategoryEdit">
                     </div>
                     <div class="flex justify-end pt-12">
-                        <button class="bg-slate-200 rounded  px-5 py-2 ml-4" id="addCategory">Cancelar</button>
+                        <button class="bg-slate-200 rounded  px-5 py-2 ml-4" id="cancelEditCategory">Cancelar</button>
                         <button class="bg-green-500 rounded text-white px-5 py-2 ml-4" id="editCategory">Editar</button>
                     </div>
                 </form>
@@ -194,7 +194,7 @@
 </section>
 
    <!--Section reports-->
-   <section class="my-4 flex justify-center">
+   <section class="my-4 flex justify-center hidden" id="sectionReports">
       <div class="sm:w-full mx-5 py-5 px-4 rounded flex flex-col bg-white lg:w-7/12">
           <h2 class="my-5 text-4xl font-bold">Reportes</h2>
           <div class="mt-7 flex flex-col items-center">

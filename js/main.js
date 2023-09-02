@@ -140,7 +140,35 @@ const showCategoriesFilters = (categories) =>{
    }
 }
 
-
+const showHiddeNavBar = () =>{
+   $('.navBarCategories').addEventListener('click', () =>{
+      $('#sectionBalance').classList.add('hidden', 'lg:hidden')
+      $('#sectionReports').classList.add('hidden', 'lg:hidden')
+      $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+      $('#addCategory').addEventListener('click', () =>{
+         $('#sectionCategories').classList.add('hidden', 'lg:hidden')
+         $('#sectionEditCategory').classList.remove('hidden', 'lg:hidden')
+         $('#editCategory').addEventListener('click', () =>{
+            $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+            $('#sectionEditCategory').classList.add('hidden', 'lg:hidden')
+         })
+         $('#cancelEditCategory').addEventListener('click', () =>{
+            $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+            $('#sectionEditCategory').classList.add('hidden', 'lg:hidden')
+         })
+      })
+   })
+   $('.navBarBalance').addEventListener('click', () =>{
+      $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
+      $('#sectionCategories').classList.add('hidden', 'lg:hidden')
+      $('#sectionReports').classList.add('hidden', 'lg:hidden')
+   })
+   $('.navBarReports').addEventListener('click', () =>{
+      $('#sectionBalance').classList.add('hidden', 'lg:hidden')
+      $('#sectionCategories').classList.add('hidden', 'lg:hidden')
+      $('#sectionReports').classList.remove('hidden', 'lg:hidden')
+   })
+}
 
 const initializer = () =>{
    get('categories')
@@ -162,6 +190,7 @@ const initializer = () =>{
       e.preventDefault()
       pushOperation()
    })
+   showHiddeNavBar()
 }
 
 window.addEventListener('load', initializer)
