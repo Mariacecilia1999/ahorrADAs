@@ -153,9 +153,9 @@ const showOperations = (operations) =>{
                                                    <td>${categoryOperation}</td>
                                                    <td>${date}</td>
                                                    <td>${cost}</td>
-                                                   <td>
-                                                      <a>Editar</a>
-                                                      <a>Eliminar</a>
+                                                   <td class='flex flex-col'>
+                                                      <a onclick='editOperationForm(${id})'>Editar</a>
+                                                      <a onclick='deleteOperation(${id})'>Eliminar</a>
                                                    </td>
                                                 </tr>
                                                 `
@@ -166,6 +166,38 @@ const showOperations = (operations) =>{
    }
 }
 
+const editOperationForm = (id) =>{
+   $('.textTitle').innerText = 'Editar operación'
+   $('#sectionBalance').classList.add('hidden', 'lg:hidden')
+   $('#sectionNewOperationForm').classList.remove('hidden', 'lg:hidden')
+   $('.addEditOperation').classList.remove('hidden', 'lg:hidden')
+   $('#addOperation').classList.add('hidden', 'lg:hidden')
+
+   const idOperation = $('.addEditOperation').setAttribute('operation-id', id)
+   const operationSelected = get('operations').find(operation => operation.id === id)
+      $('#description').value = operationSelected.description
+      $('#cost').value = operationSelected.cost
+      $('#typeOperation').value = operationSelected.typeOperation
+      $('#newOperationsCategories').value = operationSelected.categoryOperation
+      $('#date').value = operationSelected.date
+}
+
+const editOperation = () =>{
+   const idOperation = parseInt($('.addEditOperation').getAttribute('operation-id'))
+   const allOperations = get('operations').map(operation =>{
+      if(operation.id === idOperation){
+         return operations()
+      }
+      return operation
+   })
+   set('operations', allOperations)
+}
+
+const deleteOperation = (id) =>{
+   const deleteTheOperation = get('operations').filter(operation => operation.id !== id)
+   set('operations', deleteTheOperation)
+   showOperations(get('operations'))
+}
 
 const showHiddeNavBar = () =>{
    $('.navBarCategories').addEventListener('click', () =>{
@@ -204,6 +236,8 @@ const showHiddeNavBar = () =>{
    $('#btnAddNewOperationNew').addEventListener('click', () =>{
       $('#sectionBalance').classList.add('hidden', 'lg:hidden')
       $('#sectionNewOperationForm').classList.remove('hidden', 'lg:hidden')
+      $('.addEditOperation').classList.add('hidden', 'lg:hidden')
+      $('#addOperation').classList.remove('hidden', 'lg:hidden')
    })
 
    $('#addOperation').addEventListener('click', () =>{
@@ -214,6 +248,13 @@ const showHiddeNavBar = () =>{
    $('#cancelAddOperation').addEventListener('click', () =>{
       $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
       $('#sectionNewOperationForm').classList.add('hidden', 'lg:hidden')
+      $('.textTitle').innerText = 'Nueva operación'
+   })
+   $('.addEditOperation').addEventListener('click', () =>{
+      $('#sectionNewOperationForm').classList.add('hidden', 'lg:hidden')
+      $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
+      $('.textTitle').innerText = 'Nueva operación'
+      showOperations(get('operations'))
    })
 }
 
@@ -228,6 +269,10 @@ const initializer = () =>{
    $('#editCategory').addEventListener('click', (e) =>{
       e.preventDefault()
       editCategory()
+   })
+   $('.addEditOperation').addEventListener('click', (e) =>{
+      e.preventDefault()
+      editOperation()
    })
    showCategoriesFormOperations(get('categories'))
    showCategoriesFilters(get('categories'))
