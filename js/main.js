@@ -199,6 +199,24 @@ const deleteOperation = (id) =>{
    showOperations(get('operations'))
 }
 
+//SECTION WITH REPORTS
+const reports = (allOperations) =>{
+   if(allOperations.length > 0){
+      $('#withReports').classList.remove('hidden', 'lg:hidden')
+      $('#noReports').classList.add('hidden','lg:hidden')
+      filtersReports()
+   }else{
+      $('#withReports').classList.add('hidden', 'lg:hidden')
+      $('#noReports').classList.remove('hidden', 'lg:hidden')
+   }
+}
+
+const filtersReports = () =>{
+   console.log('aaaaa')
+}
+
+
+
 const showHiddeNavBar = () =>{
    $('.navBarCategories').addEventListener('click', () =>{
       $('#sectionBalance').classList.add('hidden', 'lg:hidden')
@@ -207,6 +225,7 @@ const showHiddeNavBar = () =>{
       $('#addCategory').addEventListener('click', () =>{
          $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
          //$('#sectionEditCategory').classList.remove('hidden', 'lg:hidden')
+         $('#sectionWithReports').classList.add('hidden', 'lg:hidden')
    })
    $('#editCategory').addEventListener('click', () =>{
       $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
@@ -221,11 +240,14 @@ const showHiddeNavBar = () =>{
       $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
       $('#sectionCategories').classList.add('hidden', 'lg:hidden')
       $('#sectionReports').classList.add('hidden', 'lg:hidden')
+      $('#sectionWithReports').classList.add('hidden', 'lg:hidden')
    })
    $('.navBarReports').addEventListener('click', () =>{
       $('#sectionBalance').classList.add('hidden', 'lg:hidden')
       $('#sectionCategories').classList.add('hidden', 'lg:hidden')
       $('#sectionReports').classList.remove('hidden', 'lg:hidden')
+      reports(get('operations'))
+      //$('#sectionWithReports').classList.add('hidden', 'lg:hidden')
    })
 
    $('#btnAddNewOperation').addEventListener('click', () =>{
@@ -260,7 +282,9 @@ const showHiddeNavBar = () =>{
 
 const initializer = () =>{
    set('operations', storedOperations)
+   reports(get('operations'))
    showCategory(get('categories'))
+   reports(get('operations'))
    $('#addCategory').addEventListener('click', (e) =>{
       e.preventDefault()
       pushCategory()
