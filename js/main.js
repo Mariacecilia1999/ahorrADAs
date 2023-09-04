@@ -113,7 +113,7 @@ const operations = () => {
   return {
       id:id(),
       description: $('#description').value,
-      cost: $('#cost').value,
+      cost: parseInt($('#cost').value),
       typeOperation: $('#typeOperation').value,
       categoryOperation: $('#newOperationsCategories').value,
       date: $('#date').value
@@ -204,16 +204,60 @@ const reports = (allOperations) =>{
    if(allOperations.length > 0){
       $('#withReports').classList.remove('hidden', 'lg:hidden')
       $('#noReports').classList.add('hidden','lg:hidden')
-      filtersReports()
    }else{
       $('#withReports').classList.add('hidden', 'lg:hidden')
       $('#noReports').classList.remove('hidden', 'lg:hidden')
    }
 }
 
-const filtersReports = () =>{
-   console.log('aaaaa')
+//Categoría con más ganancia
+const categoryWithMoreProfit = () =>{
+      let categories = {}
+   
+
+   //Filtro por tipo ganancia
+   const filterByGain = get('operations').filter(operation => operation.typeOperation === 'ganancia')
+
+
+
+  
+   for(const {category} of get('categories')){
+      console.log(filterByGain)
+      let revenue = 0
+      const filterCategory = filterByGain.filter(categoyFilter =>{
+         
+         //console.log(categoyFilter.cost)
+         // console.log(categoyFilter.categoryOperation)
+         if(categoyFilter.categoryOperation == category){
+            revenue += categoyFilter.cost
+         }
+         categories[category] = revenue
+      })
+   }
+   console.log(categories)
+
+   let greaterAmount = 0
+   let bestCategory = ''
+   for(const key in categories){
+      //console.log(key)
+      //console.log(categories[key])
+      if(categories[key] > greaterAmount){
+         greaterAmount = categories[key] 
+         bestCategory = key
+      }
+   }
+   $('#bestCategory').innerHTML = bestCategory
+   $('#greaterAmount').innerHTML = `+$${greaterAmount}`
+
 }
+
+
+
+
+const filtersReports = () =>{
+   categoryWithMoreProfit()
+}
+
 
 
 
@@ -306,6 +350,7 @@ const initializer = () =>{
    })
    showHiddeNavBar()
    showOperations(get('operations'))
+   filtersReports()
 }
 
 window.addEventListener('load', initializer)
