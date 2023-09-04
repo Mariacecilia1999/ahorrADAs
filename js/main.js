@@ -222,7 +222,7 @@ const categoryWithMoreProfit = () =>{
 
   
    for(const {category} of get('categories')){
-      console.log(filterByGain)
+      //console.log(filterByGain)
       let revenue = 0
       const filterCategory = filterByGain.filter(categoyFilter =>{
          
@@ -234,7 +234,7 @@ const categoryWithMoreProfit = () =>{
          categories[category] = revenue
       })
    }
-   console.log(categories)
+   ///console.log(categories)
 
    let greaterAmount = 0
    let bestCategory = ''
@@ -251,11 +251,45 @@ const categoryWithMoreProfit = () =>{
 
 }
 
+const categoryWithMoreExpense = () =>{
+   const categories = {}
+   const filterTypeOperation = get('operations').filter(operation => operation.typeOperation === 'gasto')
+
+   console.log(filterTypeOperation)
+
+   for(const {category} of get('categories')){
+      //console.log(category)
+      let expense = -0
+      const filterCategory = filterTypeOperation.filter(categoryFilter =>{
+         if(category === categoryFilter.categoryOperation){
+            expense -= categoryFilter.cost
+            categories[category] = expense
+         }
+      })
+
+      
+   }
+
+   //console.log(categories)
+   //console.log(get('operations'))
+   let higherSpending = 0
+   let higherExpenseCategory = ''
+
+   for(const key in categories){
+      if(categories[key] < higherSpending){
+         higherSpending = categories[key]
+         higherExpenseCategory = key
+      }
+   }
+   $('#higherSpending').innerText = higherSpending
+   $('#higherExpenseCategory').innerText = higherExpenseCategory
+}
 
 
 
 const filtersReports = () =>{
    categoryWithMoreProfit()
+   categoryWithMoreExpense()
 }
 
 
