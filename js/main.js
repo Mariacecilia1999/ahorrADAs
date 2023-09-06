@@ -110,7 +110,7 @@ const showCategoriesFormOperations = (categories) =>{
 }
 
 const operations = () => {
-  return {
+   return {
       id:id(),
       description: $('#description').value,
       cost: parseInt($('#cost').value),
@@ -255,14 +255,14 @@ const categoryWithMoreExpense = () =>{
    const categories = {}
    const filterTypeOperation = get('operations').filter(operation => operation.typeOperation === 'gasto')
 
-   console.log(filterTypeOperation)
+   //console.log(filterTypeOperation)
 
    for(const {category} of get('categories')){
       //console.log(category)
-      let expense = -0
+      let expense = 0
       const filterCategory = filterTypeOperation.filter(categoryFilter =>{
          if(category === categoryFilter.categoryOperation){
-            expense -= categoryFilter.cost
+            expense += categoryFilter.cost
             categories[category] = expense
          }
       })
@@ -276,20 +276,88 @@ const categoryWithMoreExpense = () =>{
    let higherExpenseCategory = ''
 
    for(const key in categories){
-      if(categories[key] < higherSpending){
+      if(categories[key] > higherSpending){
          higherSpending = categories[key]
          higherExpenseCategory = key
       }
    }
-   $('#higherSpending').innerText = higherSpending
+   $('#higherSpending').innerText = `-$${higherSpending}`
    $('#higherExpenseCategory').innerText = higherExpenseCategory
 }
+
+const monthWithTheHighestProfit = () =>{
+   const filterByType = get('operations').filter(operation => operation.typeOperation === 'ganancia')
+   //Quiero obtener el mes con más ganancias
+   //Tengo que extraer la fecha del mes y la cuenta total de cada mes
+   //Con esa información hago un objeto para 
+   const monthyEarnings = { 
+      //fecha : 1000,
+      //fecha segundo mes :3000
+   }
+   filterByType.forEach(operation =>{
+      const date = new Date(operation.date)
+      const newDate = `${date.getMonth()+1}/${date.getFullYear()}`
+      if(!monthyEarnings[newDate]){
+         monthyEarnings[newDate] = 0
+      }
+      monthyEarnings[newDate] += operation.cost
+   })
+   let bestCount = 0
+   let bestMonth = ''
+   for(const key in monthyEarnings){
+      console.log(key)
+      console.log(monthyEarnings[key])
+      if(monthyEarnings[key] > bestCount){
+         bestCount = monthyEarnings[key]
+         bestMonth = key
+      }
+  }
+  $('#bestMonth').innerText = `${bestMonth}`
+  $('#bestMonthCost').innerText = `+${bestCount}`
+}
+
+
+
+const monthWithTheHighestSpending = () =>{
+   const filterByType = get('operations').filter(operation => operation.typeOperation  === 'gasto')
+   const monthlyExpenses = {}
+   
+   filterByType.forEach(expense => {
+      let accountPerMonth = -0
+      const date = new Date(expense.date)
+      const monthAndYear = `${date.getMonth() +1}/${date.getFullYear()}`
+      if(!monthlyExpenses[monthAndYear]){
+         monthlyExpenses[monthAndYear] = 0
+      }
+      accountPerMonth = expense.cost
+      monthlyExpenses[monthAndYear] -= accountPerMonth
+   })
+
+   //console.log(monthlyExpenses)
+   let monthWithMoreExpenses = ''
+   let countMoreSpending = 0
+   for(const month in monthlyExpenses){
+
+      if(monthlyExpenses[month] < countMoreSpending){
+         countMoreSpending = monthlyExpenses[month]
+         monthWithMoreExpenses = month
+      }
+   }
+   $('#monthExpenses').innerText = `${monthWithMoreExpenses}`
+   $('#countMoreSpending').innerText = `${countMoreSpending}`
+   
+}
+
+
 
 
 
 const filtersReports = () =>{
    categoryWithMoreProfit()
    categoryWithMoreExpense()
+   monthWithTheHighestProfit()
+   monthWithTheHighestSpending()
+
 }
 
 
