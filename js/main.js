@@ -234,7 +234,7 @@ const categoryWithMoreProfit = () =>{
          categories[category] = revenue
       })
    }
-   ///console.log(categories)
+   //console.log(categories)
 
    let greaterAmount = 0
    let bestCategory = ''
@@ -374,6 +374,19 @@ const categoryBalance = () =>{
    }
 
    console.log(balanceObj)
+   for(const key in balanceObj){
+      const category = key
+      const profit = balanceObj[key].profit
+      const expense = balanceObj[key].expense
+      const balance = profit - expense
+      $('.totalsByCategory').innerHTML += ` <tr class="bg-green-500 text-justify">
+                                                <td class="py-5 w-1/4">${category}</td>
+                                                <td class="py-5 w-1/4">${profit}</td>
+                                                <td class="py-5 w-1/4">${expense}</td>
+                                                <td class="py-5 w-1/4">${balance}</td>
+                                             </tr>`
+
+   }
 
    const balanceCategories = {}
    for(const key in balanceObj){
@@ -392,8 +405,7 @@ const categoryBalance = () =>{
       }
    }
 
-   console.log(categoryWithBestBalance)
-   console.log(bestBalance)
+  
    $('#categoryBestBalance').innerText = categoryWithBestBalance
    $('#bestBalance').innerText = `$${bestBalance}`
 }
