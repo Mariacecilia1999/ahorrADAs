@@ -348,7 +348,55 @@ const monthWithTheHighestSpending = () =>{
    
 }
 
+const categoryBalance = () =>{
+   const balanceObj = {}
+   
+   for(const {category} of get('categories')){
+      let acc = 0
+      let profitCount = 0
+      const filterExpense = get('operations').filter(operation =>{
+         if(operation.typeOperation === 'gasto'){
+            if(category === operation.categoryOperation){
+               acc += operation.cost
+            }
+         }else{
+              if(category === operation.categoryOperation){
+               profitCount += operation.cost
+              }
+         }
 
+         if (acc !== 0 || profitCount !== 0) {
+            balanceObj[category] = {
+               profit: profitCount,
+               expense: acc
+            };
+      }})
+   }
+
+   console.log(balanceObj)
+
+   const balanceCategories = {}
+   for(const key in balanceObj){
+      balanceCategories[key] =  balanceObj[key].profit - balanceObj[key].expense
+   }
+   
+   let bestBalance = -Infinity
+   let categoryWithBestBalance = ''
+
+   for(const key in balanceCategories){
+      console.log(key)
+      console.log(balanceCategories[key])
+      if(balanceCategories[key] > bestBalance){
+         bestBalance = balanceCategories[key]
+         categoryWithBestBalance = key
+      }
+   }
+
+   console.log(categoryWithBestBalance)
+   console.log(bestBalance)
+   $('#categoryBestBalance').innerText = categoryWithBestBalance
+   $('#bestBalance').innerText = `$${bestBalance}`
+}
 
 
 
@@ -357,7 +405,7 @@ const filtersReports = () =>{
    categoryWithMoreExpense()
    monthWithTheHighestProfit()
    monthWithTheHighestSpending()
-
+   categoryBalance()
 }
 
 
