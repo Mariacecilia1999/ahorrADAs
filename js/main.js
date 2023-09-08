@@ -410,7 +410,27 @@ const categoryBalance = () =>{
    $('#bestBalance').innerText = `$${bestBalance}`
 }
 
-
+const totalsPerMonth  = () =>{
+   const obj = {}
+   const filterTypeOperation = get('operations').filter(operation =>{
+       const newDate = new Date(operation.date).getMonth() +1
+      
+   if(!obj[newDate]){
+      obj[newDate] = {
+         expense: 0,
+         profit: 0,
+         balance: 0
+      }
+   }
+   if(operation.typeOperation === 'gasto'){
+      obj[newDate].expense = operation.cost
+   }else{
+      obj[newDate].profit = operation.cost
+   }
+   obj[newDate].balance = obj[newDate].profit - obj[newDate].expense
+   })
+   console.log(obj)
+}
 
 const filtersReports = () =>{
    categoryWithMoreProfit()
@@ -418,6 +438,7 @@ const filtersReports = () =>{
    monthWithTheHighestProfit()
    monthWithTheHighestSpending()
    categoryBalance()
+   totalsPerMonth()
 }
 
 
