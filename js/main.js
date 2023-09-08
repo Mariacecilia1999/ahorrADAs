@@ -413,7 +413,8 @@ const categoryBalance = () =>{
 const totalsPerMonth  = () =>{
    const obj = {}
    const filterTypeOperation = get('operations').filter(operation =>{
-       const newDate = new Date(operation.date).getMonth() +1
+       const date = new Date(operation.date)
+       const newDate = `${date.getMonth() +1}/${date.getFullYear()}`
       
    if(!obj[newDate]){
       obj[newDate] = {
@@ -429,7 +430,15 @@ const totalsPerMonth  = () =>{
    }
    obj[newDate].balance = obj[newDate].profit - obj[newDate].expense
    })
-   console.log(obj)
+   for(const key in obj){
+      console.log(obj[key])
+      $('.showTotals').innerHTML += `<tr class="bg-green-500 text-justify">
+      <td class="py-5" id="totalsMonth">${key}</td>
+      <td id="totalsProfit">+$${obj[key].profit}</td>
+      <td id="totalsExpense">-$${obj[key].expense}</td>
+      <td id="totalsBalance">$${obj[key].balance}</td>
+  </tr>`
+   }
 }
 
 const filtersReports = () =>{
