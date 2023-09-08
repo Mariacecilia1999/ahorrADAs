@@ -142,6 +142,23 @@ const showCategoriesFilters = (categories) =>{
    }
 }
 
+const calculationsBalance = () =>{
+   let accProfit = 0
+   let accExpense = 0
+   let total = 0
+   get('operations').forEach(operation =>{
+      if(operation.typeOperation === 'ganancia'){
+         accProfit = operation.cost
+      }else{
+         accExpense = operation.cost
+      }
+      total = accProfit - accExpense
+   })
+   console.log(accProfit)
+   console.log(accExpense)
+   console.log(total)
+}
+calculationsBalance()
 const showOperations = (operations) =>{
    if(operations.length > 0){
       $('#operationWithoutResults').classList.add('hidden', 'lg:hidden')
