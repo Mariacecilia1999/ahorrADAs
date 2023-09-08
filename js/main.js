@@ -50,7 +50,7 @@ const addCategory = () =>{
 }
 }
 
-const pushCategory = (value) =>{
+const pushCategory = () =>{
    const newArray = get('categories')
    const addNewCategory = addCategory()
    newArray.push(addNewCategory)
@@ -199,7 +199,6 @@ const deleteOperation = (id) =>{
    showOperations(get('operations'))
 }
 
-//SECTION WITH REPORTS
 const reports = (allOperations) =>{
    if(allOperations.length > 0){
       $('#withReports').classList.remove('hidden', 'lg:hidden')
@@ -210,7 +209,6 @@ const reports = (allOperations) =>{
    }
 }
 
-//Categoría con más ganancia
 const categoryWithMoreProfit = () =>{
       let categories = {}
    
@@ -449,7 +447,6 @@ const filtersReports = () =>{
    categoryBalance()
    totalsPerMonth()
 }
-
 
 
 
