@@ -161,7 +161,7 @@ const calculationsBalance = () =>{
    console.log(accExpense)
    console.log(total) 
 }
-calculationsBalance()
+
 const showOperations = (operations) =>{
    if(operations.length > 0){
       $('#operationWithoutResults').classList.add('hidden', 'lg:hidden')
@@ -534,6 +534,7 @@ const showHiddeNavBar = () =>{
 }
 
 const initializer = () =>{
+   calculationsBalance()
    set('operations', storedOperations)
    reports(get('operations'))
    showCategory(get('categories'))
