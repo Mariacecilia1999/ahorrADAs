@@ -152,9 +152,12 @@ const calculationsBalance = () =>{
       }
       total = accProfit - accExpense
    })
+   $('#balanceProfit').innerText = `+$${accProfit}`
+   $('#balanceExpense').innerText = `-$${accExpense}`
+   $('#balanceTotal').innerText = `$${total}`
    console.log(accProfit)
    console.log(accExpense)
-   console.log(total)
+   console.log(total) 
 }
 calculationsBalance()
 
