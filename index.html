@@ -77,16 +77,16 @@
                 </div>
                 <div class="flex flex-col">
                     <label for="" class="py-2 font-semibold">Desde</label>
-                    <input type="date" class="border rounded py-2">
+                    <input type="date" class="border rounded py-2" id="filterDate">
                 </div>
 
                 <div class="py-2">
                     <label for="" class="font-semibold">Ordenar por</label>
-                    <select name="" id="filterBy" class="border w-full rounded py-2">
-                        <option value="masReciente">Más reciente</option>
-                        <option value="menosReciente">Menos reciente</option>
-                        <option value="mayorMonto">Mayor monto</option>
-                        <option value="menorMonto">Menor monto</option>
+                    <select name="" id="filterOrder" class="border w-full rounded py-2">
+                        <option value="moreRecent">Más reciente</option>
+                        <option value="lessRecent">Menos reciente</option>
+                        <option value="greaterAmount">Mayor monto</option>
+                        <option value="smallerAmount">Menor monto</option>
                         <option value="az">A/Z</option>
                         <option value="za">Z/A</option>
                     </select>

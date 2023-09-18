@@ -146,6 +146,7 @@ const calculationsBalance = () =>{
    let accProfit = 0
    let accExpense = 0
    let total = 0
+   if(get('operations') > 0){
    get('operations').forEach(operation =>{
       if(operation.typeOperation === 'ganancia'){
          accProfit = operation.cost
@@ -154,6 +155,7 @@ const calculationsBalance = () =>{
       }
       total = accProfit - accExpense
    })
+}
    $('#balanceProfit').innerText = `+$${accProfit}`
    $('#balanceExpense').innerText = `-$${accExpense}`
    $('#balanceTotal').innerText = `$${total}`
@@ -468,6 +470,58 @@ const filtersReports = () =>{
    totalsPerMonth()
 }
 
+const applyFilters = () =>{
+   console.log(get('operations'))
+   const filterType = get('operations').filter(operation => {
+      if($('#filterType').value === 'todos'){
+         return operation
+      }
+      return operation.typeOperation === $('#filterType').value
+   })
+
+   const filterCategory = filterType.filter(category =>{
+      if($('#filterCategory').value === 'todas'){
+         return category
+      }
+      return category.categoryOperation=== $('#filterCategory').value
+   })
+
+   const filterDate = filterCategory.filter(date =>{
+      return date.date >= $('#filterDate').value
+   })
+
+
+   let finalFilter
+   if ($('#filterOrder').value === 'lessRecent') {
+   finalFilter = filterDate.sort((a, b) => new Date(a.date) - new Date(b.date))
+   }
+   if ($('#filterOrder').value === 'moreRecent') {
+   finalFilter = filterDate.sort((a, b) => new Date(b.date) - new Date(a.date))
+   }
+   if ($('#filterOrder').value === 'az') {
+      finalFilter = filterDate.sort((a, b) => a.description.localeCompare(b.description))
+    }
+   if ($('#filterOrder').value === 'za') {
+      finalFilter = filterDate.sort((a, b) => b.description.localeCompare(a.description))
+   }
+   if($('#filterOrder').value === 'greaterAmount'){
+      finalFilter =  filterDate.sort((a, b) => b.cost - a.cost)
+   }
+   if($('#filterOrder').value === 'smallerAmount'){
+      finalFilter =  filterDate.sort((a, b) => a.cost - b.cost)
+   }
+
+   console.log($('#filterOrder').value)
+   showOperations(finalFilter)
+}
+
+
+const filterCallers = () =>{
+   $('#filterType').addEventListener('change', applyFilters)
+   $('#filterCategory').addEventListener('change', applyFilters)
+   $('#filterDate').addEventListener('change', applyFilters)
+   $('#filterOrder').addEventListener('change', applyFilters)
+}
 
 
 const showHiddeNavBar = () =>{
@@ -534,6 +588,7 @@ const showHiddeNavBar = () =>{
 }
 
 const initializer = () =>{
+   filterCallers()
    calculationsBalance()
    set('operations', storedOperations)
    reports(get('operations'))
