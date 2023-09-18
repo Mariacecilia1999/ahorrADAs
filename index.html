@@ -58,40 +58,43 @@
             <div class="sm:w-full bg-white rounded mx-5 my-5 py-8 px-7 lg:w-10/12">
                 <div class="flex justify-between items-center pt-1 pb-5">
                     <h3 class="font-bold text-2xl text-gray-800">Filtros</h3>
-                    <a href="#" class="text-sky-500">Ocultar filtros</a>
+                    <a href="#" class="text-sky-500 hidden" id="showFilters">Mostrar filtros</a>
+                    <a href="#" class="text-sky-500" id="hiddenFilters">Ocultar filtros</a>
                 </div>
-                <div class="flex flex-col">
-                    <label for="" class="py-2 font-semibold">Tipo</label>
-                    <select name="" id="filterType" class="border rounded py-2">
-                        <option value="todos">Todos</option>
-                        <option value="gasto">Gasto</option>
-                        <option value="ganancia">Ganancia</option>
-                    </select>
-                </div>
-                <div class="flex flex-col">
-                    <label for="" class="py-2 font-semibold">Categoría</label>
-                    <!--Dynamic categories with js arr-->
-                    <select name="" id="filterCategory" class="border rounded py-2">
-                        <option value="todas">Todas</option>
-                    </select>
-                </div>
-                <div class="flex flex-col">
-                    <label for="" class="py-2 font-semibold">Desde</label>
-                    <input type="date" class="border rounded py-2" id="filterDate">
-                </div>
+                <div class="containerFilters">
+                    <div class="flex flex-col">
+                        <label for="" class="py-2 font-semibold">Tipo</label>
+                        <select name="" id="filterType" class="border rounded py-2">
+                            <option value="todos">Todos</option>
+                            <option value="gasto">Gasto</option>
+                            <option value="ganancia">Ganancia</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="" class="py-2 font-semibold">Categoría</label>
+                        <!--Dynamic categories with js arr-->
+                        <select name="" id="filterCategory" class="border rounded py-2">
+                            <option value="todas">Todas</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="" class="py-2 font-semibold">Desde</label>
+                        <input type="date" class="border rounded py-2" id="filterDate">
+                    </div>
 
-                <div class="py-2">
-                    <label for="" class="font-semibold">Ordenar por</label>
-                    <select name="" id="filterOrder" class="border w-full rounded py-2">
-                        <option value="moreRecent">Más reciente</option>
-                        <option value="lessRecent">Menos reciente</option>
-                        <option value="greaterAmount">Mayor monto</option>
-                        <option value="smallerAmount">Menor monto</option>
-                        <option value="az">A/Z</option>
-                        <option value="za">Z/A</option>
-                    </select>
-                </div>
+                    <div class="py-2">
+                        <label for="" class="font-semibold">Ordenar por</label>
+                        <select name="" id="filterOrder" class="border w-full rounded py-2">
+                            <option value="moreRecent">Más reciente</option>
+                            <option value="lessRecent">Menos reciente</option>
+                            <option value="greaterAmount">Mayor monto</option>
+                            <option value="smallerAmount">Menor monto</option>
+                            <option value="az">A/Z</option>
+                            <option value="za">Z/A</option>
+                        </select>
+                    </div>
             </div>
+        </div>
         </div>
         <!--Operations without results-->
             <div class="bg-white rounded sm:full lg:w-6/12 px-3 py-5 px-5 mx-5 my-5 lg:h-5/6" id="operationWithoutResults">

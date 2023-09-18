@@ -515,7 +515,6 @@ const applyFilters = () =>{
    showOperations(finalFilter)
 }
 
-
 const filterCallers = () =>{
    $('#filterType').addEventListener('change', applyFilters)
    $('#filterCategory').addEventListener('change', applyFilters)
@@ -525,6 +524,19 @@ const filterCallers = () =>{
 
 
 const showHiddeNavBar = () =>{
+   $('#hiddenFilters').addEventListener('click', () =>{
+      $('.containerFilters').classList.add('hidden', 'lg:hidden')
+      $('#hiddenFilters').classList.add('hidden', 'lg:hidden')
+      $('#showFilters').classList.remove('hidden', 'lg:hidden')
+   })
+
+   $('#showFilters').addEventListener('click', () =>{
+      $('.containerFilters').classList.remove('hidden', 'lg:hidden')
+      $('#hiddenFilters').classList.remove('hidden', 'lg:hidden')
+      $('#showFilters').classList.add('hidden', 'lg:hidden')
+   })
+
+
    $('.navBarCategories').addEventListener('click', () =>{
       $('#sectionBalance').classList.add('hidden', 'lg:hidden')
       $('#sectionReports').classList.add('hidden', 'lg:hidden')
