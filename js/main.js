@@ -598,8 +598,55 @@ const showHiddeNavBar = () =>{
       showOperations(get('operations'))
    })
 }
+const menuMobile = () =>{
+   $('#showMenu').addEventListener('click', () =>{
+      $('#closeMenu').classList.remove('hidden')
+      $('#showMenu').classList.add('hidden')
+      $('#showMenuMobile').classList.remove('hidden')
+   })
+   $('#closeMenu').addEventListener('click', () =>{
+      $('#showMenu').classList.remove('hidden')
+      $('#closeMenu').classList.add('hidden')
+      $('#showMenuMobile').classList.add('hidden')
+   })
+   $('.navBarBalanceMobile').addEventListener('click', () =>{
+      $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
+      $('#sectionCategories').classList.add('hidden', 'lg:hidden')
+      $('#sectionReports').classList.add('hidden', 'lg:hidden')
+      $('#sectionWithReports').classList.add('hidden', 'lg:hidden')
+   })
+
+   $('.navBarCategoriesMobile').addEventListener('click', () =>{
+      $('#sectionBalance').classList.add('hidden', 'lg:hidden')
+      $('#sectionReports').classList.add('hidden', 'lg:hidden')
+      $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+      $('#addCategory').addEventListener('click', () =>{
+         $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+         //$('#sectionEditCategory').classList.remove('hidden', 'lg:hidden')
+         $('#sectionWithReports').classList.add('hidden', 'lg:hidden')
+   })
+   $('#editCategory').addEventListener('click', () =>{
+      $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+      $('#sectionEditCategory').classList.add('hidden', 'lg:hidden')
+   })
+   $('#cancelEditCategory').addEventListener('click', () =>{
+      $('#sectionCategories').classList.remove('hidden', 'lg:hidden')
+      $('#sectionEditCategory').classList.add('hidden', 'lg:hidden')
+   })
+})
+
+$('.navBarReportsMobile').addEventListener('click', () =>{
+   $('#sectionBalance').classList.add('hidden', 'lg:hidden')
+   $('#sectionCategories').classList.add('hidden', 'lg:hidden')
+   $('#sectionReports').classList.remove('hidden', 'lg:hidden')
+   reports(get('operations'))
+   //$('#sectionWithReports').classList.add('hidden', 'lg:hidden')
+})
+}
+
 
 const initializer = () =>{
+   menuMobile()
    filterCallers()
    calculationsBalance()
    set('operations', storedOperations)

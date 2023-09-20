@@ -12,9 +12,9 @@
    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-stone-100">
-   <header class="bg-teal-400 flex justify-between px-7 py-8">
+   <header class="sm: px-5 py-2 bg-teal-400  flex items-center justify-between lg:px-7 lg:py-7">
       <h1 class="text-white text-4xl font-semibold"><i class="fas fa-wallet mr-2" aria-hidden="true"></i>AhorrADAs</h1>
-      <nav class="w-3/12">
+      <nav class="hidden w-3/12 lg:block">
          <ul class="flex justify-between">
             <li class="navBarBalance">
                <a href="#" class="text-white">
@@ -35,7 +35,34 @@
             </li>
          </ul>
       </nav>
-   </header> 
+      <div class="lg:hidden flex items-center">
+        <img src="./img/cerrar.png" alt="" class="hidden rounded hover:bg-teal-300 w-16 px-3 py-3" id="closeMenu">
+        <img src="./img/barra-de-menus (1).png" alt="" class="rounded hover:bg-teal-300 w-16 px-3 py-3" id="showMenu">
+      </div>
+      
+   </header>
+   <div class="w-full bg-green-500 hidden lg:hidden bg-white" id="showMenuMobile">
+    <ul class="flex flex-col w-full">
+        <li class="w-full  navBarBalanceMobile my-2 hover:bg-blue-100 text-blue-700">
+           <a href="#" class="w-full bg-red-400 text-gray-700 pl-3 hover:text-blue-700">
+              <i class="fas fa-chart-line mr-2  hover:text-blue-700" aria-hidden="true"></i
+                 >Balance
+           </a>
+        </li>
+        <li class="navBarCategoriesMobile my-2">
+           <a href="#" class="text-gray-700">
+              <i class="fas fa-tag mr-2" aria-hidden="true"></i>Categorías
+           </a>
+        </li>
+        <li class="navBarReportsMobile my-2">
+           <a href="#" class="text-gray-700">
+              <i class="fas fa-chart-pie mr-2" aria-hidden="true"></i
+                 >Reportes
+           </a>
+        </li>
+     </ul>
+   </div>
+
    <!--Section balance-->
    <section class="mt-10 sm:flex-col lg:flex" id="sectionBalance">
     <div class="sm:flex-col lg:flex lg:flex-row justify-center lg:w-12/12">
