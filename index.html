@@ -3,6 +3,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>AhorrADAs</title>
+   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
    <link
    rel="stylesheet"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
@@ -43,19 +44,20 @@
    </header>
    <div class="w-full bg-green-500 hidden lg:hidden bg-white" id="showMenuMobile">
     <ul class="flex flex-col w-full">
-        <li class="w-full  navBarBalanceMobile my-2 hover:bg-blue-100 text-blue-700">
-           <a href="#" class="w-full bg-red-400 text-gray-700 pl-3 hover:text-blue-700">
-              <i class="fas fa-chart-line mr-2  hover:text-blue-700" aria-hidden="true"></i
+        <li class="navBarBalanceMobile py-2 flex items-center my-1 hover:bg-blue-100">
+            <a href="#" class="hover:text-blue-800 text-gray-700 pl-3 text-blue-800  w-full">
+                <i class="fas fa-chart-line w-12/12 mr-2" aria-hidden="true"></i
                  >Balance
            </a>
         </li>
-        <li class="navBarCategoriesMobile my-2">
-           <a href="#" class="text-gray-700">
-              <i class="fas fa-tag mr-2" aria-hidden="true"></i>Categorías
+        <li class="navBarCategoriesMobile py-2 my-2 hover:bg-blue-100 flex items-center my-1 hover:bg-blue-100">
+           <a href="#" class="w-full hover:text-blue-800 text-gray-700 pl-3 text-blue-800">
+              <i class="fas fa-tag mr-2" aria-hidden="true"></i>
+              Categorías
            </a>
         </li>
-        <li class="navBarReportsMobile my-2">
-           <a href="#" class="text-gray-700">
+        <li class="navBarReportsMobile py-2 flex items-center my-1 hover:bg-blue-100">
+           <a href="#" class="w-full hover:text-blue-800 text-gray-700 pl-3 text-blue-800">
               <i class="fas fa-chart-pie mr-2" aria-hidden="true"></i
                  >Reportes
            </a>
@@ -66,52 +68,52 @@
    <!--Section balance-->
    <section class="mt-10 sm:flex-col lg:flex" id="sectionBalance">
     <div class="sm:flex-col lg:flex lg:flex-row justify-center lg:w-12/12">
-        <div class="flex-col">
-            <div class="sm:w-full bg-white rounded mx-5 my-5 py-6 px-7 lg:w-10/12">
-                <h3 class="text-3xl font-bold pt-5">Balance</h3>
+        <div class="flex-col mr-5">
+            <div class="sm:11/12 bg-white rounded mx-5 my-5 py-6 px-7 lg:w-full">
+                <h3 class="text-3xl font-bold pt-5 text-gray-700">Balance</h3>
                 <div class="flex justify-between pt-9 py-2">
-                    <p>Ganancias</p>
+                    <p class="text-xl">Ganancias</p>
                     <span class="text-green-300" id="balanceProfit">+$0</span>
                 </div>
                 <div class="flex justify-between py-2">
-                    <p>Gastos</p>
+                    <p class="text-xl">Gastos</p>
                     <span class="text-red-300" id="balanceExpense">-$0</span>
                 </div>
                 <div class="flex justify-between py-2">
-                    <p>Total</p>
+                    <p class="text-2xl">Total</p>
                     <span class="text-gray-500" id="balanceTotal">$0</span>
                 </div>
             </div>
-            <div class="sm:w-full bg-white rounded mx-5 my-5 py-8 px-7 lg:w-10/12">
+            <div class="sm:w-12/12 bg-white rounded mx-5 my-5 px-3 py-8 px-7 lg:w-full">
                 <div class="flex justify-between items-center pt-1 pb-5">
-                    <h3 class="font-bold text-2xl text-gray-800">Filtros</h3>
+                    <h3 class="font-bold text-2xl text-gray-700">Filtros</h3>
                     <a href="#" class="text-sky-500 hidden" id="showFilters">Mostrar filtros</a>
                     <a href="#" class="text-sky-500" id="hiddenFilters">Ocultar filtros</a>
                 </div>
                 <div class="containerFilters">
                     <div class="flex flex-col">
-                        <label for="" class="py-2 font-semibold">Tipo</label>
-                        <select name="" id="filterType" class="border rounded py-2">
+                        <label for="" class="py-2 font-bold">Tipo</label>
+                        <select name="" id="filterType" class="pl-2 border rounded py-2">
                             <option value="todos">Todos</option>
                             <option value="gasto">Gasto</option>
                             <option value="ganancia">Ganancia</option>
                         </select>
                     </div>
                     <div class="flex flex-col">
-                        <label for="" class="py-2 font-semibold">Categoría</label>
+                        <label for="" class="py-2 font-bold">Categoría</label>
                         <!--Dynamic categories with js arr-->
-                        <select name="" id="filterCategory" class="border rounded py-2">
+                        <select name="" id="filterCategory" class="pl-2 border rounded py-2">
                             <option value="todas">Todas</option>
                         </select>
                     </div>
                     <div class="flex flex-col">
-                        <label for="" class="py-2 font-semibold">Desde</label>
-                        <input type="date" class="border rounded py-2" id="filterDate">
+                        <label for="" class="py-2 font-bold">Desde</label>
+                        <input type="date" class="border rounded pl-2 py-2" id="filterDate">
                     </div>
 
                     <div class="py-2">
-                        <label for="" class="font-semibold">Ordenar por</label>
-                        <select name="" id="filterOrder" class="border w-full rounded py-2">
+                        <label for="" class="font-bold">Ordenar por</label>
+                        <select name="" id="filterOrder" class="pl-2 border w-full rounded py-2">
                             <option value="moreRecent">Más reciente</option>
                             <option value="lessRecent">Menos reciente</option>
                             <option value="greaterAmount">Mayor monto</option>
@@ -246,9 +248,9 @@
 </section>
 
    <!--Section reports-->
-   <section class="my-4 flex justify-center hidden" id="sectionReports">
+   <section class="my-8 flex justify-center hidden" id="sectionReports">
       <div class="sm:w-full mx-5 py-5 px-4 rounded flex flex-col bg-white lg:w-7/12" id="noReports">
-          <h2 class="my-5 text-4xl font-bold">Reportes</h2>
+          <h2 class="my-5 text-4xl font-bold text-gray-800">Reportes</h2>
           <div class="mt-7 flex flex-col items-center">
               <img src="./img/chart.svg" alt="" class="mt-3 w-6/12">
               <h4 class="py-4 text-2xl font-medium text-slate-700">Operaciones insuficientes</h4>
@@ -263,30 +265,31 @@
         <!--RESUMEN-->
         <div class="mt-6 w-12/12">
             <h4 class="text-2xl">Resumen</h4>
-            <div class="flex justify-between py-6 font-semibold text-gray-800 text w-12/12">
-                <p class="w-4/12 bg-green-500">Categoría con mayor ganancia</p>
-                <span id="bestCategory">Categoría</span>
-                <span id="greaterAmount">+$800000</span>
+            <div class="w-full pt-5 py-3 font-semibold text-gray-800 flex justify-between gap-3 items-center text-center">
+                <p class="w-5/12 text-justify">Categoría con mayor ganancia</p>
+                
+                <p class="w-2/12"><span id="bestCategory" class="bg-teal-100 text-xs text-teal-700 py-2 px-3 rounded">Categoría</span></p>
+                <span id="greaterAmount" class="w-2/12">+$800000</span>
             </div>
-            <div class="flex justify-between py-3 font-semibold text-gray-800">
-                <p class="w-4/12 bg-green-500">Categoría con mayor gasto</p>
-                <span id="higherExpenseCategory">Categoría</span>
-                <span id="higherSpending">-$800000</span>
+            <div class="w-full pt-5 py-3 font-semibold text-gray-800 flex justify-between gap-3 items-center text-center">
+                <p class="w-5/12  text-justify">Categoría con mayor gasto</p>
+                <p class="w-2/12"><span id="higherExpenseCategory" class="bg-teal-100 text-xs text-teal-700 py-2 px-3 rounded">Categoría</span></p>
+                <span id="higherSpending" class="w-2/12">-$800000</span>
             </div>
-            <div class="flex justify-between py-3 font-semibold text-gray-800">
-                <p class="w-4/12 bg-green-500">Categoría con mayor balance</p>
-                <span id="categoryBestBalance">Categoría</span>
-                <span id="bestBalance">-$800000</span>
+            <div class="w-full pt-5 py-3 font-semibold text-gray-800 flex justify-between gap-3 items-center text-center">
+                <p class="w-5/12  text-justify">Categoría con mayor balance</p>
+                <p class="w-2/12"><span id="categoryBestBalance" class="bg-teal-100 text-xs text-teal-700 py-2 px-3 rounded">Categoría</span></p>
+                <span id="bestBalance" class="w-2/12">-$800000</span>
             </div>
-            <div class="flex justify-between py-3 font-semibold text-gray-800">
-                <p class="w-4/12 bg-green-500">Mes con mayor ganancia</p>
-                <span id="bestMonth">Categoría</span>
-                <span id="bestMonthCost">-$800000</span>
+            <div class="w-full pt-5 py-3 font-semibold text-gray-800 flex justify-between gap-3 items-center text-center">
+                <p class="w-5/12  text-justify">Mes con mayor ganancia</p>
+                <span id="bestMonth" class="w-2/12">Categoría</span>
+                <span id="bestMonthCost" class="w-2/12">-$800000</span>
             </div>
-            <div class="flex justify-between py-3 font-semibold text-gray-800">
-                <p class="w-4/12 bg-green-500">Mes con mayor gasto</p>
-                <span id="monthExpenses">Categoría</span>
-                <span id="countMoreSpending">-$800000</span>
+            <div class="w-full pt-5 py-3 font-semibold text-gray-800 flex justify-between gap-3 items-center text-center">
+                <p class="w-5/12  text-justify">Mes con mayor gasto</p>
+                <span id="monthExpenses" class="w-2/12">Categoría</span>
+                <span id="countMoreSpending" class="w-2/12">-$800000</span>
             </div>
         </div>
 
@@ -295,34 +298,34 @@
         <div class="mt-6">
             <h4 class="text-2xl">Totales por categorías</h4>
             <div class="py-6 font-semibold text-gray-800">
-                <table class="w-full">
-                    <tr class=" bg-green-500 text-justify">
-                        <th class="w-4/12">Categoria</th>
-                        <th>Ganancias</th>
-                        <th>Gastos</th>
-                        <th>Balance</th>
-                    </tr>
-                    <tbody class="totalsByCategory">
-                    </tbody>
-                </table>
+                <div class="w-full">
+                    <div class="flex justify-between gap-3 items-center text-center">
+                        <p class=" w-4/12">Categoria</p>
+                        <p class=" w-4/12">Ganancias</p>
+                        <p class=" w-4/12">Gastos</p>
+                        <p class=" w-4/12">Balance</p>
+                    </div>
+                    <div class="totalsByCategory">
+                    </div>
+                </div>
             </div>
         </div>
 
     <!--TOTALES POR MES-->
-        <div class="mt-6">
+        <div class="mt-6 w-full">
             <h4 class="text-2xl">Totales por mes</h4>
-            <div class="py-6 font-semibold text-gray-800">
-                <table class="w-full">
-                    <tr class=" bg-green-500 text-justify">
-                        <th>Mes</th>
-                        <th>Ganancias</th>
-                        <th>Gastos</th>
-                        <th>Balance</th>
-                    </tr>
-                    <tbody class="showTotals">
+            <div class="py-6 font-semibold text-gray-800 w-full">
+                <div class="w-12/12">
+                    <div class="flex justify-between gap-3 items-center text-center">
+                        <p class=" w-4/12">Mes</p>
+                        <p class=" w-4/12">Ganancias</p>
+                        <p class=" w-4/12">Gastos</p>
+                        <p class=" w-4/12">Balance</p>
+                    </div>
+                    <div class="showTotals">
                         
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
       </div>
