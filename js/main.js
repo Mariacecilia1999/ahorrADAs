@@ -99,6 +99,7 @@ const editCategory = () => {
    })
    set('categories', updatedCategories)
    showCategory(get('categories'))
+   
 }
 
 //NEW OPERATION FORM CATEGORIES
@@ -132,6 +133,7 @@ const pushOperation = () =>{
    console.log(get('operations'))
    filtersReports()
    deleteValueForm()
+   calculationsBalance()
 }
 
 
@@ -144,20 +146,21 @@ const showCategoriesFilters = (categories) =>{
    }
 }
 
-const calculationsBalance = () =>{
+const calculationsBalance = () => {
    let accProfit = 0
    let accExpense = 0
-   let total = 0
-   if(get('operations') > 0){
-   get('operations').forEach(operation =>{
-      if(operation.typeOperation === 'ganancia'){
-         accProfit = operation.cost
-      }else{
-         accExpense = operation.cost
+   const operationsData = get('operations') || []
+
+   operationsData.forEach(operation => {
+      if (operation.typeOperation === 'ganancia') {
+         accProfit += operation.cost
+      } else {
+         accExpense += operation.cost
       }
-      total = accProfit - accExpense
    })
-}
+
+   const total = accProfit - accExpense;
+
    $('#balanceProfit').innerText = `+$${accProfit}`
    $('#balanceExpense').innerText = `-$${accExpense}`
    $('#balanceTotal').innerText = `$${total}`
@@ -170,24 +173,33 @@ const showOperations = (operations) =>{
    if(operations.length > 0){
       $('#operationWithoutResults').classList.add('hidden', 'lg:hidden')
       $('#operationWithResults').classList.remove('hidden', 'lg:hidden')
-      $('.showingOperations').innerHTML = ''
+      $('#showingOperations').innerHTML = ''
+      $('#showingOperationsMobile').innerHTML = ''
       for(const {id, description, cost, typeOperation, categoryOperation, date} of operations){
-         $('.showingOperations').innerHTML += ` <div class='my-2'>
-                                                   <tr class='text-xs'>
-                                                      <td>${description}</td>
-                                                      <td>
-                                                      <a class='bg-teal-100 text-teal-700 rounded py-2 px-3'>
-                                                      ${categoryOperation}</td>
-                                                      </a>
-                                                      <td>${date}</td>
-                                                      <td>${cost}</td>
-                                                      <td class='flex flex-col text-blue-700'>
+         const costColorClass = typeOperation === 'gasto' ? 'text-red-500' : 'text-green-500'
+         $('#showingOperations').innerHTML += ` <div class='hidden lg:block lg:flex lg:justify-between lg:items-center py-5 text-center'>
+                                                      <p class='w-1/4'>${description}</p>
+                                                      <p class='w-1/4 '>
+                                                         <a class='bg-teal-100 text-teal-700 rounded py-2 px-3'>
+                                                         ${categoryOperation}
+                                                         </a>
+                                                      </p>
+                                                      <p class='w-1/4 '>${date}</p>
+                                                      <p class='${costColorClass} w-1/4'>${cost}</p>
+                                                      <div class='flex flex-col text-blue-700 text-xs w-1/4'>
                                                          <a onclick='editOperationForm(${id})' class='my-2'>Editar</a>
                                                          <a onclick='deleteOperation(${id})'>Eliminar</a>
-                                                      </td>
-                                                   </tr>
+                                                      </div>
                                                 </div>
-                                                `
+       `
+       $('#showingOperationsMobile').innerHTML += `<div class='py-4'>
+       <div class='flex justify-between py-4'>
+       <p class='font-semibold'>${description}</p> <a class='bg-teal-100 text-teal-700 rounded py-2 px-3 text-xs'>${categoryOperation}</a></div>
+       <div class='flex justify-between'><p class='${costColorClass} text-3xl font-bold'>${cost}</p>  <div class='flex flex-row items-center text-blue-700 text-xs'>
+       <a onclick='editOperationForm(${id})' class='my-2 pr-3'>Editar</a>
+       <a onclick='deleteOperation(${id})'>Eliminar</a>
+    </div></div>
+         </div>`
       }
    }else{
       $('#operationWithoutResults').classList.remove('hidden', 'lg:hidden')
@@ -222,6 +234,7 @@ const editOperation = () =>{
    set('operations', allOperations)
    filtersReports()
    deleteValueForm()
+   calculationsBalance()
 }
 
 const deleteOperation = (id) =>{
@@ -229,10 +242,12 @@ const deleteOperation = (id) =>{
    set('operations', deleteTheOperation)
    showOperations(get('operations'))
    filtersReports()
+   calculationsBalance()
 }
 
 const reports = (allOperations) =>{
    if(allOperations.length > 0){
+      filtersReports()
       $('#withReports').classList.remove('hidden', 'lg:hidden')
       $('#noReports').classList.add('hidden','lg:hidden')
    }else{
@@ -412,6 +427,7 @@ const categoryBalance = () =>{
       const profit = balanceObj[key].profit
       const expense = balanceObj[key].expense
       const balance = profit - expense
+      $('.totalsByCategory').innerHTML = ''
       $('.totalsByCategory').innerHTML += ` <div class="flex justify-between gap-3 items-center text-center">
                                                 <p class="py-5  w-4/12">${category}</p>
                                                 <p class="py-5 text-green-500 w-4/12">+${profit}</p>
@@ -465,6 +481,7 @@ const totalsPerMonth  = () =>{
    })
    for(const key in obj){
       console.log(obj[key])
+      $('.showTotals').innerHTML = ''
       $('.showTotals').innerHTML += `<div class="flex justify-between gap-3 items-center text-center">
       <p class="py-5  w-4/12" id="totalsMonth">${key}</p>
       <p id="totalsProfit" class="text-green-500  w-4/12">+$${obj[key].profit}</p>
@@ -579,6 +596,7 @@ const showHiddeNavBar = () =>{
       $('#sectionCategories').classList.add('hidden', 'lg:hidden')
       $('#sectionReports').classList.remove('hidden', 'lg:hidden')
       reports(get('operations'))
+      filtersReports()
       //$('#sectionWithReports').classList.add('hidden', 'lg:hidden')
    })
 
@@ -592,12 +610,16 @@ const showHiddeNavBar = () =>{
       $('#sectionNewOperationForm').classList.remove('hidden', 'lg:hidden')
       $('.addEditOperation').classList.add('hidden', 'lg:hidden')
       $('#addOperation').classList.remove('hidden', 'lg:hidden')
+      showOperations(get('operations'))
+      filtersReports()
+      calculationsBalance()
    })
 
    $('#addOperation').addEventListener('click', () =>{
       $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
       $('#sectionNewOperationForm').classList.add('hidden', 'lg:hidden')
       showOperations(get('operations'))
+      filtersReports()
    })
    $('#cancelAddOperation').addEventListener('click', () =>{
       $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
@@ -609,6 +631,7 @@ const showHiddeNavBar = () =>{
       $('#sectionBalance').classList.remove('hidden', 'lg:hidden')
       $('.textTitle').innerText = 'Nueva operación'
       showOperations(get('operations'))
+      filtersReports()
    })
 }
 const menuMobile = () =>{
@@ -667,6 +690,10 @@ const deleteValueForm = () =>{
 
 
 const initializer = () =>{
+   if(get('operations') > 0){
+
+   filtersReports()
+   }
    menuMobile()
    filterCallers()
    calculationsBalance()
@@ -682,20 +709,24 @@ const initializer = () =>{
    $('#editCategory').addEventListener('click', (e) =>{
       e.preventDefault()
       editCategory()
+      calculationsBalance()
    })
    $('.addEditOperation').addEventListener('click', (e) =>{
       e.preventDefault()
       editOperation()
+      filtersReports()
+      calculationsBalance()
    })
    showCategoriesFormOperations(get('categories'))
    showCategoriesFilters(get('categories'))
    $('#addOperation').addEventListener('click', (e) =>{
       e.preventDefault()
       pushOperation()
+      filtersReports()
+      calculationsBalance()
    })
    showHiddeNavBar()
    showOperations(get('operations'))
-   filtersReports()
 }
 
 window.addEventListener('load', initializer)
